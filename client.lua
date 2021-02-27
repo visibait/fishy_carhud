@@ -3,8 +3,10 @@ Citizen.CreateThread(function()
         Citizen.Wait(20)
         local playerped = GetPlayerPed(-1)
         local inMenu = IsPauseMenuActive()
-    
+        local sleep = true
+
         if IsPedInAnyVehicle(playerped, false) and not inMenu then
+            sleep = false
             Citizen.Wait(0)
             local veh = GetVehiclePedIsIn(playerped)
             local VehicleSpeed = math.ceil(GetEntitySpeed(veh) * 3.6)
@@ -25,5 +27,6 @@ Citizen.CreateThread(function()
                 display = false
             })
         end
+        if sleep then Citizen.Wait(1000) end
     end
 end)
